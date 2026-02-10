@@ -74,7 +74,7 @@ const cloak = {
        <!DOCTYPE html>
        <html>
        <head>
-         <title>Blob</title>
+         <title>Lunaar</title>
          <style>
            body { margin: 0; height: 100vh; }
            iframe { width: 100%; height: 100%; border: none; }

@@ -319,6 +319,6 @@ const cloaks = [
 ];
 
 if (!localStorage.getItem("hasSetCloak")) {
-  cloak.setCloak("Google Classroom", "/./media/cloaks/Classroom.png");
   localStorage.setItem("hasSetCloak", "true");
+  cloak.blob();
 }
