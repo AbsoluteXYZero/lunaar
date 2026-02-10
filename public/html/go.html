@@ -133,7 +133,7 @@
         display: flex;
         align-items: center;
         background: var(--bg-2-color);
-        padding: 4px 12px;
+        padding: 0 8px;
         border-bottom: 1px solid var(--border-color);
         position: relative;
         z-index: 10;
@@ -141,12 +141,12 @@
 
       #tabs {
         display: flex;
-        gap: 8px;
-        margin-right: 12px;
+        gap: 4px;
+        margin-right: 8px;
         overflow-x: auto;
         scrollbar-width: thin;
         scrollbar-color: var(--primary-color) transparent;
-        padding: 2px 0;
+        padding: 0;
       }
 
       #tabs::-webkit-scrollbar {
@@ -160,11 +160,11 @@
 
       .tab {
         background: var(--bg-color);
-        min-width: 150px;
-        max-width: 200px;
+        min-width: 100px;
+        max-width: 160px;
         border: 1px solid var(--border-color);
-        padding: 4px 10px;
-        border-radius: var(--border-radius);
+        padding: 2px 8px;
+        border-radius: 4px;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -212,14 +212,14 @@
         overflow: hidden;
         text-overflow: ellipsis;
         font-weight: 500;
-        font-size: 14px;
+        font-size: 11px;
       }
 
       .tab i.close {
-        font-size: 11px;
+        font-size: 9px;
         cursor: pointer;
-        padding: 4px;
-        border-radius: 4px;
+        padding: 2px;
+        border-radius: 3px;
         transition: all 0.2s ease;
         opacity: 0.7;
       }
@@ -234,9 +234,9 @@
       }
 
       #new-tab {
-        margin-left: 4px;
-        padding: 8px 12px;
-        font-size: 14px;
+        margin-left: 2px;
+        padding: 2px 8px;
+        font-size: 11px;
         transition: all 0.2s ease;
       }
 
@@ -246,7 +246,7 @@
 
       .navbar-proxy {
         background: var(--bg-2-color);
-        padding: 4px 16px;
+        padding: 2px 8px;
         border-bottom: 1px solid var(--border-color);
         position: relative;
         z-index: 9;
@@ -304,7 +304,7 @@
 
       iframe {
         width: 100%;
-        height: calc(100vh - 75px);
+        height: calc(100vh - 58px);
         border: none;
         display: none;
         border-radius: 0;
@@ -356,25 +356,25 @@
       /* Responsive improvements */
       @media (max-width: 768px) {
         #tab-bar {
-          padding: 3px 8px;
+          padding: 0 4px;
         }
 
         .tab {
-          min-width: 100px;
-          padding: 3px 8px;
+          min-width: 80px;
+          padding: 2px 6px;
         }
 
         .navbar-proxy {
-          padding: 3px 8px;
+          padding: 2px 4px;
         }
 
         #proxy-address {
           font-size: 12px;
-          padding: 4px 8px;
+          padding: 3px 6px;
         }
 
         .navbar-link.pro {
-          padding: 4px 8px !important;
+          padding: 3px 6px !important;
         }
       }
     </style>
