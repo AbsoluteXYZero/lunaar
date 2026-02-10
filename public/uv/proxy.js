@@ -45,6 +45,7 @@ async function setTransport(transportsel) {
   }
 }
 transportReady = setTransport(transport);
+window.transportReady = transportReady;
 
 window.setTransport = setTransport;
 
@@ -172,18 +173,20 @@ function start(url) {
   }
 }
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await transportReady;
-  if (localStorage.getItem("proxy-backend") === "ultraviolet") {
-    const url = search(address.value, getSearchEngine());
-    start(url);
-  } else {
-    const res = window.sjEncodeAndGo(address.value);
+if (form) {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    await transportReady;
+    if (localStorage.getItem("proxy-backend") === "ultraviolet") {
+      const url = search(address.value, getSearchEngine());
+      start(url);
+    } else {
+      const res = window.sjEncodeAndGo(address.value);
 
-    console.log(res);
-    sessionStorage.setItem("lpurl", res);
-    window.location.href = "/go";
-  }
-});
+      console.log(res);
+      sessionStorage.setItem("lpurl", res);
+      window.location.href = "/go";
+    }
+  });
+}
 console.log("Proxy started");

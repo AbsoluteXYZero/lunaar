@@ -382,7 +382,8 @@
     <script src="../js/nav.js"></script>
     <script src="../js/main.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
+      document.addEventListener("DOMContentLoaded", async () => {
+        if (window.transportReady) await window.transportReady;
         const prxBck = document.getElementById("prx-bck");
         const prxFwd = document.getElementById("prx-fwd");
         const prxRefresh = document.getElementById("prx-refresh");
@@ -509,9 +510,10 @@
 
         const searchInput = document.getElementById("proxy-address");
 
-        searchInput.addEventListener("keydown", (e) => {
+        searchInput.addEventListener("keydown", async (e) => {
           if (e.key === "Enter") {
             e.preventDefault();
+            if (window.transportReady) await window.transportReady;
             const query = searchInput.value.trim();
             if (query) {
               const frame = getActiveFrame();
