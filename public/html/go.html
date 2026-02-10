@@ -101,16 +101,18 @@
     <style>
       body {
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        margin: 0;
       }
 
       #toolbar {
         position: relative;
         z-index: 10;
-        transition: transform 0.3s ease;
-      }
-
-      #toolbar.collapsed {
-        transform: translateY(calc(-100% + 6px));
+        flex-shrink: 0;
+        overflow: hidden;
+        transition: height 0.3s ease;
       }
 
       #toolbar-handle {
@@ -139,6 +141,11 @@
 
       #toolbar-handle:hover #toolbar-handle-grip {
         background: var(--primary-color);
+      }
+
+      #frames {
+        flex: 1;
+        min-height: 0;
       }
 
       #tab-bar {
@@ -316,16 +323,11 @@
 
       iframe {
         width: 100%;
-        height: calc(100vh - 64px);
+        height: 100%;
         border: none;
         display: none;
         border-radius: 0;
         background: var(--bg-color);
-        transition: height 0.3s ease;
-      }
-
-      #toolbar.collapsed ~ #frames iframe {
-        height: calc(100vh - 6px);
       }
 
       iframe.active {
@@ -403,8 +405,18 @@
         if (window.transportReady) await window.transportReady;
         const toolbar = document.getElementById("toolbar");
         const toolbarHandle = document.getElementById("toolbar-handle");
+
+        // Set initial explicit height so CSS transition works
+        toolbar.style.height = toolbar.scrollHeight + "px";
+
+        const toolbarFullHeight = toolbar.scrollHeight;
+
         toolbarHandle.addEventListener("click", () => {
-          toolbar.classList.toggle("collapsed");
+          if (toolbar.classList.toggle("collapsed")) {
+            toolbar.style.height = "6px";
+          } else {
+            toolbar.style.height = toolbarFullHeight + "px";
+          }
         });
 
         const prxBck = document.getElementById("prx-bck");
