@@ -314,11 +314,16 @@ const cloaks = [
   {
     name: "blob",
     icon: "./media/logo.svg",
-    title: "Blob",
+    title: "Lunaar",
   },
 ];
 
 if (!localStorage.getItem("hasSetCloak")) {
   localStorage.setItem("hasSetCloak", "true");
   cloak.blob();
+}
+
+if (localStorage.getItem("cloakTitle") === "Blob") {
+  localStorage.setItem("cloakTitle", "Lunaar");
+  document.title = "Lunaar";
 }

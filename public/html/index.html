@@ -118,6 +118,7 @@
           src="https://inclinedallusionnearby.com/46d7fc4684f1d4b48dc6b567ace7178e/invoke.js"
         ></script>
       </div>
+      <div id="rng-text"></div>
       <div class="search-container">
         <!-- <img src="/media/cloaks/google.png" alt="" id="search-icon" /> -->
         <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
@@ -387,20 +388,25 @@
         z-index: 1000;
       }
       #rng-text {
-        font-size: 3.5rem;
-        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1rem;
+        animation: titleFloat 3s ease-in-out infinite;
+        position: relative;
+        height: 0;
+      }
+      #rng-text::after {
+        content: '';
+        display: block;
+        width: 120px;
+        height: 6px;
+        margin: 0 auto;
         background: linear-gradient(
           135deg,
           var(--primary-color),
           var(--accent-color)
         );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-align: center;
-        margin-bottom: 1rem;
-        animation: titleFloat 3s ease-in-out infinite;
-        text-shadow: 0 0 60px var(--primary-color);
+        border-radius: 50%;
+        box-shadow: 0 0 60px 30px var(--primary-color);
       }
       @keyframes titleFloat {
         0%,
