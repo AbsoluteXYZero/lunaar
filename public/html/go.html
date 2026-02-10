@@ -383,21 +383,6 @@
     <script src="../js/main.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        if (localStorage.getItem("showProxyWarning") !== "true") {
-          Swal.fire({
-            title: "Information",
-            text: "If you are experiencing issues with the pr0xxy, consider changing the pr0xxy and transport in settings.",
-            icon: "warning",
-            confirmButtonText: "Ok",
-            showClass: {
-              popup: "swal2-smooth-in",
-            },
-            hideClass: {
-              popup: "swal2-smooth-out",
-            },
-          });
-          localStorage.setItem("showProxyWarning", true);
-        }
         const prxBck = document.getElementById("prx-bck");
         const prxFwd = document.getElementById("prx-fwd");
         const prxRefresh = document.getElementById("prx-refresh");

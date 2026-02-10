@@ -194,22 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     }).showToast();
   }
-  if (localStorage.getItem("v7toast") !== "true") {
-    Toastify({
-      text: `Welcome To \u004C\u0075\u006E\u0061\u0061\u0072 V7`,
-      duration: 5000,
-      gravity: "bottom",
-      position: "right",
-      style: {
-        background: "var(--accent-color)",
-        // boxShadow: "0 3px 6px -1px var(--primary-color),0 10px 36px -4px var(--accent-color)",
-        borderRadius: "var(--border-radius)",
-        boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
-      },
-    }).showToast();
-
-    localStorage.setItem("v7toast", true);
-  }
+  localStorage.setItem("v7toast", true);
   // const transport = localStorage.getItem("proxyTransport");
 
   // if (!transport) {
@@ -263,35 +248,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Announcements modal
-  const currentAnnouncement = `
-<div>
-<h2>(BIG UPDATE) Whats New:</h2>
-  <ul style="list-style-position: inside; text-align: center;">
-    <li>ADDED 613 GXMES!</li>
-    <li>Added More page</li>
-    <li>Reverted Scramjet as default</li>
-    <li>Added Animation to gxmes/apps page</li>
-    <li>Performance Improvements</li>
-    <li>Updated AI Page</li>
-    <li>Added More AI Models</li>
-    <li>Added blob cloak</li>
-  </ul>
-  <a>Join the Discord: &#x68;&#x74;&#x74;&#x70;&#x73;&#x3a;&#x2f;&#x2f;&#x64;&#x73;&#x63;&#x2e;&#x67;&#x67;&#x2f;&#x70;&#x61;&#x72;&#x63;&#x6f;&#x69;&#x6c;</a>
-</div>`;
-  const lastAnnouncement = localStorage.getItem("lastAnnouncement");
-
-  if (lastAnnouncement !== currentAnnouncement) {
-    Swal.fire({
-      title: "Announcement",
-      html: currentAnnouncement,
-      confirmButtonText: "Alr thats cool",
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-    }).then(() => {
-      localStorage.setItem("lastAnnouncement", currentAnnouncement);
-    });
-  }
 });
 
 const cloaks = [
