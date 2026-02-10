@@ -1,9 +1,3 @@
-console.log(
-  `%\u004C\u0075\u006E\u0061\u0061\u0072%c v7 - home.js Loaded`,
-  "font-size: 16px; background-color: #9282fb; border-top-left-radius: 5px; border-bottom-left-radius: 5px; padding: 4px; font-weight: bold;",
-  "font-size: 16px; background-color: #090810; font-weight: bold; padding: 4px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;"
-);
-
 function openApp(url) {
   sessionStorage.setItem("rawurl", url);
   if (localStorage.getItem("proxy-backend") === "ultraviolet") {
@@ -70,21 +64,16 @@ addShortcutBtn.addEventListener("click", async () => {
     if (!formValues) return;
     const { name } = formValues;
     const url = /^https?:\/\//i.test(formValues.url) ? formValues.url : "https://" + formValues.url;
-    console.log("Form submitted:", { name, url });
 
     let icon = `https://www.google.com/s2/favicons?domain=${
       new URL(url).hostname
     }`;
-    console.log("Favicon URL:", icon);
 
     savedShortcuts.push({ name, url, icon });
     localStorage.setItem("shortcuts", JSON.stringify(savedShortcuts));
     createShortcutElement(name, url, icon);
     showToast(`Added "${name}"`);
-    console.log("Shortcut added:", { name, url, icon });
-  } catch (err) {
-    console.log("Error adding shortcut:", err);
-  }
+  } catch (err) {}
 });
 
 function createShortcutElement(name, url, icon) {
@@ -154,8 +143,6 @@ function createShortcutElement(name, url, icon) {
         new URL(newUrl).hostname
       }`;
       img.src = newIcon;
-      console.log("Updated favicon URL:", newIcon);
-
       span.textContent = newName;
       shortcut.onclick = () => openApp(newUrl);
 

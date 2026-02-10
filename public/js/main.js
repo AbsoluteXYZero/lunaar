@@ -1,26 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  if (!window.ConsoleLogged) {
-    console.log(
-      `%\u004C\u0075\u006E\u0061\u0061\u0072%c v7 - main.js Loaded`,
-      "font-size: 16px; background-color: #9282fb; border-top-left-radius: 5px; border-bottom-left-radius: 5px; padding: 4px; font-weight: bold;",
-      "font-size: 16px; background-color: #090810; font-weight: bold; padding: 4px; border-top-right-radius: 5px; border-bottom-right-radius: 5px;",
-    );
-
-    const ascii = `
- _._     _,-'""\`-._
-(,-.\`._,'(       |\\\`-/|
-        \`-.-' \\ )-\`( , o o)
-                    \`-    \\_\`"'- 
-        `;
-
-    console.log(
-      `%c${ascii}\ndiscord.gg/En5YJYWj3Z`,
-      "font-size: 24px; display: block; white-space: pre; text-align: center;",
-    );
-
-    window.ConsoleLogged = true;
-  }
-
   let theme = localStorage.getItem("theme");
   const background = localStorage.getItem("backgroundImage");
 
@@ -32,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (background) {
-    console.log(background);
     document.body.style.backgroundImage = `url(${background})`;
   }
   if (theme) {

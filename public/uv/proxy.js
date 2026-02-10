@@ -8,10 +8,6 @@ const form = document.getElementById("proxy-form");
  */
 const address = document.getElementById("proxy-address");
 /**
- * @type {HTMLInputElement}
- */
-const searchEngine = document.getElementById("proxy-search-engine");
-/**
  * @type {HTMLParagraphElement}
  */
 const error = document.getElementById("proxy-error");
@@ -162,7 +158,6 @@ function start(url) {
   try {
     if (__uv$config.prefix && __uv$config) {
       sessionStorage.setItem("lpurl", encodeURL(url));
-      // console.log("\u004C\u0075\u006E\u0061\u0061\u0072 Proxy URL:", sessionStorage.getItem("lpurl"));
       location.href = "/go";
       sessionStorage.setItem("rawurl", url);
     }
@@ -182,11 +177,8 @@ if (form) {
       start(url);
     } else {
       const res = window.sjEncodeAndGo(address.value);
-
-      console.log(res);
       sessionStorage.setItem("lpurl", res);
       window.location.href = "/go";
     }
   });
 }
-console.log("Proxy started");
