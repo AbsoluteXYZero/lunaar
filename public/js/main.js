@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   if (
-    window.localStorage.getItem("disableTips") !== "true" &&
+    window.localStorage.getItem("disableTips") === "false" &&
     window.localStorage.getItem("v7toast") === "true"
   ) {
     const randomMessages = [

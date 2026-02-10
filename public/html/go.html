@@ -122,7 +122,6 @@
       <div class="gradiant3"></div>
     </div>
     <div id="particles-js"></div>
-    <div id="autocomplete"></div>
     <div class="loader"></div>
     <div id="frames"></div>
     <style>
@@ -134,7 +133,7 @@
         display: flex;
         align-items: center;
         background: var(--bg-2-color);
-        padding: 8px 12px;
+        padding: 4px 12px;
         border-bottom: 1px solid var(--border-color);
         position: relative;
         z-index: 10;
@@ -164,7 +163,7 @@
         min-width: 150px;
         max-width: 200px;
         border: 1px solid var(--border-color);
-        padding: 8px 12px;
+        padding: 4px 10px;
         border-radius: var(--border-radius);
         cursor: pointer;
         display: flex;
@@ -247,7 +246,7 @@
 
       .navbar-proxy {
         background: var(--bg-2-color);
-        padding: 10px 16px;
+        padding: 4px 16px;
         border-bottom: 1px solid var(--border-color);
         position: relative;
         z-index: 9;
@@ -259,7 +258,7 @@
       }
 
       .navbar-link.pro {
-        padding: 10px 12px !important;
+        padding: 5px 10px !important;
         border-radius: var(--border-radius);
         transition: all 0.2s ease;
         position: relative;
@@ -292,8 +291,8 @@
 
       #proxy-address {
         width: 100%;
-        font-size: 15px;
-        padding: 10px 16px;
+        font-size: 13px;
+        padding: 5px 12px;
         border-radius: calc(var(--border-radius) * 1.5);
         transition: all 0.2s ease;
         font-weight: 400;
@@ -305,7 +304,7 @@
 
       iframe {
         width: 100%;
-        height: calc(100vh - 115px);
+        height: calc(100vh - 75px);
         border: none;
         display: none;
         border-radius: 0;
@@ -354,95 +353,28 @@
         }
       }
 
-      #autocomplete {
-        position: absolute;
-        left: 130px;
-        margin: 0 auto;
-        margin-top: 10px;
-        background: var(--bg-2-color);
-        border: 1px solid var(--border-color);
-        border-radius: var(--border-radius);
-        width: 100%;
-        max-width: 500px;
-        max-height: 240px;
-        overflow-y: auto;
-        z-index: 999;
-        padding: 4px 0;
-        animation: slideDown 0.2s ease;
-        display: none;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-      }
-
-      @keyframes slideDown {
-        from {
-          opacity: 0;
-          transform: translateY(-10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      #autocomplete div {
-        padding: 10px 16px;
-        cursor: pointer;
-        display: flex;
-        color: var(--text-color);
-        transition: all 0.15s ease;
-        font-size: 14px;
-        position: relative;
-      }
-
-      #autocomplete div::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 2px;
-        height: 0;
-        background: var(--primary-color);
-        transition: height 0.2s ease;
-      }
-
-      #autocomplete div:hover::before,
-      #autocomplete div.active::before {
-        height: 100%;
-      }
-
-      #autocomplete div:hover,
-      #autocomplete div.active {
-        background: linear-gradient(
-          90deg,
-          color-mix(in srgb, var(--primary-color) 80%, rgb(14, 14, 14) 85%),
-          transparent
-        );
-        color: #fff;
-        padding-left: 20px;
-      }
-
       /* Responsive improvements */
       @media (max-width: 768px) {
         #tab-bar {
-          padding: 6px 8px;
+          padding: 3px 8px;
         }
 
         .tab {
-          min-width: 120px;
-          padding: 6px 10px;
+          min-width: 100px;
+          padding: 3px 8px;
         }
 
         .navbar-proxy {
-          padding: 8px 12px;
+          padding: 3px 8px;
         }
 
         #proxy-address {
-          font-size: 14px;
-          padding: 8px 12px;
+          font-size: 12px;
+          padding: 4px 8px;
         }
 
         .navbar-link.pro {
-          padding: 8px 10px !important;
+          padding: 4px 8px !important;
         }
       }
     </style>
@@ -591,44 +523,6 @@
         });
 
         const searchInput = document.getElementById("proxy-address");
-        const autocompleteBox = document.getElementById("autocomplete");
-
-        async function fetchSuggestions(query) {
-          if (!query) {
-            autocompleteBox.innerHTML = "";
-            autocompleteBox.style.display = "none";
-            return;
-          }
-          try {
-            const res = await fetch(
-              `/api/autocomplete?q=${encodeURIComponent(query)}`
-            );
-            const suggestions = await res.json();
-            autocompleteBox.innerHTML = "";
-            if (suggestions.length === 0) {
-              autocompleteBox.style.display = "none";
-              return;
-            }
-            suggestions.forEach((s) => {
-              const item = document.createElement("div");
-              item.textContent = s.phrase;
-              item.onclick = () => {
-                searchInput.value = s.phrase;
-                autocompleteBox.innerHTML = "";
-                autocompleteBox.style.display = "none";
-              };
-              autocompleteBox.appendChild(item);
-            });
-            autocompleteBox.style.display = "block";
-          } catch (err) {
-            console.error("Autocomplete error:", err);
-            autocompleteBox.style.display = "none";
-          }
-        }
-
-        searchInput.addEventListener("input", (e) => {
-          fetchSuggestions(e.target.value);
-        });
 
         searchInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") {
@@ -661,16 +555,7 @@
                   frame.dataset.originalUrl = query;
                 }
               }
-              autocompleteBox.innerHTML = "";
-              autocompleteBox.style.display = "none";
             }
-          }
-        });
-
-        document.addEventListener("click", (e) => {
-          if (!autocompleteBox.contains(e.target) && e.target !== searchInput) {
-            autocompleteBox.innerHTML = "";
-            autocompleteBox.style.display = "none";
           }
         });
 

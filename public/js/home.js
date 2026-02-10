@@ -28,20 +28,7 @@ const greetings = [
   "Welcome to the best",
   "Welcome",
   "こんにちは",
-  "こんにちは",
-  "こんにちは",
   "\u004C\u0075\u006E\u0061\u0061\u0072",
-  "uhh",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
-  "Merry Christmas",
 ];
 function getRandomGreeting() {
   const randomIndex = Math.floor(Math.random() * greetings.length);
