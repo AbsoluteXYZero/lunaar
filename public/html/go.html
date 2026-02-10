@@ -569,6 +569,13 @@
         }
 
         createTab(startUrl);
+        if (rawUrl) {
+          const activeFrame = document.querySelector("iframe.active");
+          if (activeFrame) {
+            activeFrame.dataset.originalUrl = rawUrl;
+            prxAddress.value = rawUrl;
+          }
+        }
       });
     </script>
 
