@@ -34,6 +34,7 @@ if (!transport) {
   localStorage.setItem("transport", transport);
 }
 
+let transportReady;
 async function setTransport(transportsel) {
   if (transportsel == "epoxy") {
     await connection.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
@@ -43,7 +44,7 @@ async function setTransport(transportsel) {
     await connection.setTransport("/bareasmodule/index.mjs", [bareUrl]);
   }
 }
-setTransport(transport);
+transportReady = setTransport(transport);
 
 window.setTransport = setTransport;
 
@@ -173,6 +174,7 @@ function start(url) {
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
+  await transportReady;
   if (localStorage.getItem("proxy-backend") === "ultraviolet") {
     const url = search(address.value, getSearchEngine());
     start(url);
