@@ -87,8 +87,8 @@
           </div>
         </nav>
       </div>
-      <div id="toolbar-handle"><div id="toolbar-handle-grip"></div></div>
     </div>
+    <div id="toolbar-handle"><div id="toolbar-handle-grip"></div></div>
 
     <div id="blobs">
       <div class="gradiant"></div>
@@ -117,6 +117,7 @@
 
       #toolbar-handle {
         height: 6px;
+        flex-shrink: 0;
         background: var(--bg-2-color);
         cursor: pointer;
         display: flex;
@@ -413,7 +414,7 @@
 
         toolbarHandle.addEventListener("click", () => {
           if (toolbar.classList.toggle("collapsed")) {
-            toolbar.style.height = "6px";
+            toolbar.style.height = "0";
           } else {
             toolbar.style.height = toolbarFullHeight + "px";
           }
