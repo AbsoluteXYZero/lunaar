@@ -50,41 +50,44 @@
     <script src="../js/cloak.js"></script>
   </head>
   <body style="overflow: hidden">
-    <div id="tab-bar">
-      <div id="tabs"></div>
-      <button id="new-tab" class="btn"><i class="fa-solid fa-plus"></i></button>
-    </div>
-    <div class="proxy-container">
-      <nav class="navbar-proxy">
-        <div class="navbar-links">
-          <a id="prx-bck" class="navbar-link pro"
-            ><i class="fa-solid fa-arrow-left"></i
-          ></a>
-          <a id="prx-fwd" class="navbar-link pro"
-            ><i class="fa-solid fa-arrow-right"></i
-          ></a>
-          <a id="prx-refresh" class="navbar-link pro"
-            ><i class="fa-solid fa-rotate-right"></i
-          ></a>
-          <input
-            type="text"
-            id="proxy-address"
-            placeholder="Enter URL..."
-            class="input navbar-input"
-            style="width: 100%"
-          />
+    <div id="toolbar">
+      <div id="tab-bar">
+        <div id="tabs"></div>
+        <button id="new-tab" class="btn"><i class="fa-solid fa-plus"></i></button>
+      </div>
+      <div class="proxy-container">
+        <nav class="navbar-proxy">
+          <div class="navbar-links">
+            <a id="prx-bck" class="navbar-link pro"
+              ><i class="fa-solid fa-arrow-left"></i
+            ></a>
+            <a id="prx-fwd" class="navbar-link pro"
+              ><i class="fa-solid fa-arrow-right"></i
+            ></a>
+            <a id="prx-refresh" class="navbar-link pro"
+              ><i class="fa-solid fa-rotate-right"></i
+            ></a>
+            <input
+              type="text"
+              id="proxy-address"
+              placeholder="Enter URL..."
+              class="input navbar-input"
+              style="width: 100%"
+            />
 
-          <a id="prx-home" class="navbar-link pro"
-            ><i class="fa-solid fa-house"></i
-          ></a>
-          <a id="prx-fuillscreen" class="navbar-link pro"
-            ><i class="fa-solid fa-maximize"></i
-          ></a>
-          <a id="prx-inspect" class="navbar-link pro"
-            ><i class="fa-solid fa-code"></i
-          ></a>
-        </div>
-      </nav>
+            <a id="prx-home" class="navbar-link pro"
+              ><i class="fa-solid fa-house"></i
+            ></a>
+            <a id="prx-fuillscreen" class="navbar-link pro"
+              ><i class="fa-solid fa-maximize"></i
+            ></a>
+            <a id="prx-inspect" class="navbar-link pro"
+              ><i class="fa-solid fa-code"></i
+            ></a>
+          </div>
+        </nav>
+      </div>
+      <div id="toolbar-handle"><div id="toolbar-handle-grip"></div></div>
     </div>
 
     <div id="blobs">
@@ -98,6 +101,44 @@
     <style>
       body {
         overflow: hidden;
+      }
+
+      #toolbar {
+        position: relative;
+        z-index: 10;
+        transition: transform 0.3s ease;
+      }
+
+      #toolbar.collapsed {
+        transform: translateY(calc(-100% + 6px));
+      }
+
+      #toolbar-handle {
+        height: 6px;
+        background: var(--bg-2-color);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid var(--border-color);
+        transition: height 0.2s ease, background 0.2s ease;
+      }
+
+      #toolbar-handle:hover {
+        height: 10px;
+        background: color-mix(in srgb, var(--primary-color) 30%, var(--bg-2-color));
+      }
+
+      #toolbar-handle-grip {
+        width: 40px;
+        height: 2px;
+        border-radius: 1px;
+        background: var(--border-color);
+        transition: background 0.2s ease;
+      }
+
+      #toolbar-handle:hover #toolbar-handle-grip {
+        background: var(--primary-color);
       }
 
       #tab-bar {
@@ -275,11 +316,16 @@
 
       iframe {
         width: 100%;
-        height: calc(100vh - 58px);
+        height: calc(100vh - 64px);
         border: none;
         display: none;
         border-radius: 0;
         background: var(--bg-color);
+        transition: height 0.3s ease;
+      }
+
+      #toolbar.collapsed ~ #frames iframe {
+        height: calc(100vh - 6px);
       }
 
       iframe.active {
@@ -355,6 +401,12 @@
     <script>
       document.addEventListener("DOMContentLoaded", async () => {
         if (window.transportReady) await window.transportReady;
+        const toolbar = document.getElementById("toolbar");
+        const toolbarHandle = document.getElementById("toolbar-handle");
+        toolbarHandle.addEventListener("click", () => {
+          toolbar.classList.toggle("collapsed");
+        });
+
         const prxBck = document.getElementById("prx-bck");
         const prxFwd = document.getElementById("prx-fwd");
         const prxRefresh = document.getElementById("prx-refresh");
