@@ -124,23 +124,15 @@ const defaults = [
   },
 ];
 
-const isArray = Array.isArray(savedShortcuts);
-const existing = isArray ? savedShortcuts : [];
-const missingDefaults = defaults.filter(
-  (d) =>
-    !existing.some(
-      (s) => (s.url && s.url.toLowerCase()) === d.url.toLowerCase()
-    )
-);
-const combinedShortcuts = [...missingDefaults, ...existing];
-
-if (!isArray || missingDefaults.length > 0) {
-  localStorage.setItem("shortcuts", JSON.stringify(combinedShortcuts));
-  savedShortcuts.length = 0;
-  combinedShortcuts.forEach((s) => savedShortcuts.push(s));
+if (!localStorage.getItem("shortcutsInit")) {
+  localStorage.setItem("shortcutsInit", "true");
+  if (savedShortcuts.length === 0) {
+    defaults.forEach((d) => savedShortcuts.push(d));
+    localStorage.setItem("shortcuts", JSON.stringify(savedShortcuts));
+  }
 }
 
-combinedShortcuts.forEach((s) => createShortcutElement(s.name, s.url, s.icon));
+savedShortcuts.forEach((s) => createShortcutElement(s.name, s.url, s.icon));
 
 addShortcutBtn.addEventListener("click", async () => {
   try {
@@ -166,7 +158,8 @@ addShortcutBtn.addEventListener("click", async () => {
     });
 
     if (!formValues) return;
-    const { name, url } = formValues;
+    const { name } = formValues;
+    const url = /^https?:\/\//i.test(formValues.url) ? formValues.url : "https://" + formValues.url;
     console.log("Form submitted:", { name, url });
 
     let icon = `https://www.google.com/s2/favicons?domain=${
@@ -243,7 +236,8 @@ function createShortcutElement(name, url, icon) {
       });
 
       if (!formValues) return;
-      const { newName, newUrl } = formValues;
+      const { newName } = formValues;
+      const newUrl = /^https?:\/\//i.test(formValues.newUrl) ? formValues.newUrl : "https://" + formValues.newUrl;
 
       // Update favicon based on new URL
       const newIcon = `https://www.google.com/s2/favicons?domain=${
