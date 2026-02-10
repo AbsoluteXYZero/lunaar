@@ -5,6 +5,7 @@ console.log(
 );
 
 function openApp(url) {
+  sessionStorage.setItem("rawurl", url);
   if (localStorage.getItem("proxy-backend") === "ultraviolet") {
     sessionStorage.setItem(
       "lpurl",
@@ -18,51 +19,6 @@ function openApp(url) {
 }
 
 
-const searchInput = document.getElementById("proxy-address");
-const autocompleteBox = document.getElementById("autocomplete");
-
-async function fetchSuggestions(query) {
-  if (!query) {
-    autocompleteBox.innerHTML = "";
-    autocompleteBox.style.display = "none";
-    return;
-  }
-
-  try {
-    const res = await fetch(`/api/autocomplete?q=${encodeURIComponent(query)}`);
-    const suggestions = await res.json();
-    autocompleteBox.innerHTML = "";
-    if (suggestions.length === 0) {
-      autocompleteBox.style.display = "none";
-      return;
-    }
-    suggestions.forEach((s) => {
-      const item = document.createElement("div");
-      item.textContent = s.phrase;
-      item.onclick = () => {
-        searchInput.value = s.phrase;
-        autocompleteBox.innerHTML = "";
-        autocompleteBox.style.display = "none";
-      };
-      autocompleteBox.appendChild(item);
-    });
-    autocompleteBox.style.display = "block";
-  } catch (err) {
-    console.error("Autocomplete error:", err);
-    autocompleteBox.style.display = "none";
-  }
-}
-
-searchInput.addEventListener("input", (e) => {
-  fetchSuggestions(e.target.value);
-});
-
-document.addEventListener("click", (e) => {
-  if (!autocompleteBox.contains(e.target) && e.target !== searchInput) {
-    autocompleteBox.innerHTML = "";
-    autocompleteBox.style.display = "none";
-  }
-});
 
 const addShortcutBtn = document.getElementById("add-shortcut");
 const shortcutsContainer = document.querySelector(".shortcuts");
@@ -85,36 +41,6 @@ function showToast(text) {
 
 const savedShortcuts = JSON.parse(localStorage.getItem("shortcuts") || "[]");
 
-const defaults = [
-  {
-    name: "Tiktok",
-    url: "https://tiktok.com",
-    icon: "https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://tiktok.com&size=64",
-  },
-  {
-    name: "Discord",
-    url: "https://discord.com",
-    icon: "https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://discord.com&size=64",
-  },
-  {
-    name: "Youtube",
-    url: "https://www.youtube.com",
-    icon: "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://www.youtube.com&size=64",
-  },
-  {
-    name: "Spotify",
-    url: "https://spotify.com",
-    icon: "https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://spotify.com&size=64",
-  },
-];
-
-if (!localStorage.getItem("shortcutsInit")) {
-  localStorage.setItem("shortcutsInit", "true");
-  if (savedShortcuts.length === 0) {
-    defaults.forEach((d) => savedShortcuts.push(d));
-    localStorage.setItem("shortcuts", JSON.stringify(savedShortcuts));
-  }
-}
 
 savedShortcuts.forEach((s) => createShortcutElement(s.name, s.url, s.icon));
 

@@ -320,21 +320,22 @@ main {
   /* justify-content: justify-content; */
   background-color: var(--bg-2-color);
   width: 100%;
-  max-width: 500px;
-  height: 50px;
+  max-width: 700px;
+  height: 60px;
   border-radius: var(--border-radius);
   transition: all 0.2s ease-in-out;
   border: 2px solid var(--border-color);
 }
 .search-container .search {
   width: 100%;
-  max-width: 500px;
-  height: 50px;
+  max-width: 700px;
+  height: 60px;
   border-radius: 10px;
   background: transparent;
   border: 1px wheat;
   color: white;
   outline: none;
+  font-size: 1.1rem;
 }
 .search-container form {
   width: 100%;
@@ -349,10 +350,11 @@ main {
 }
 .search-container .search {
   width: 100%;
-  max-width: 500px;
-  height: 50px;
+  max-width: 700px;
+  height: 60px;
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
   background: transparent;
   border: 1px transparent;
   color: var(--text-color);
