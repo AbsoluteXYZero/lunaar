@@ -10,8 +10,6 @@
 
 ![Lunaar image](https://api.microlink.io/?url=https%3A%2F%2Flunaar.org&screenshot=true&embed=screenshot.url)
 
-> [!IMPORTANT]
-> If you fork Lunaar, please give it a star.
 
 Join our [Discord Server](https://dsc.gg/parcoil) for links and more!
 
