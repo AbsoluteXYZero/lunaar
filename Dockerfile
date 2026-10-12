@@ -7,6 +7,8 @@ WORKDIR /app
 
 # Copy package files
 COPY package.json pnpm-lock.yaml ./
+# [ZeroLabs] 2026-10-12 1:04 AM - added: copy vendored scramjet tarball before install (see also: package.json)
+COPY vendor ./vendor
 
 # Install dependencies (production only)
 RUN pnpm install --prod --frozen-lockfile
